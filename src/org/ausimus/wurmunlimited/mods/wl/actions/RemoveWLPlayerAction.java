@@ -1,4 +1,4 @@
-package org.ausimus.wurmunlimited.mods.wl;
+package org.ausimus.wurmunlimited.mods.wl.actions;
 
 import com.wurmonline.server.MiscConstants;
 import com.wurmonline.server.behaviours.Action;
@@ -8,6 +8,7 @@ import com.wurmonline.server.items.Item;
 import com.wurmonline.server.items.ItemList;
 import com.wurmonline.server.items.ItemTypes;
 import com.wurmonline.server.questions.AWL;
+import com.wurmonline.server.questions.RWL;
 import com.wurmonline.server.zones.FocusZone;
 import com.wurmonline.server.zones.Zones;
 import java.util.Collections;
@@ -18,15 +19,15 @@ import org.gotti.wurmunlimited.modsupport.actions.BehaviourProvider;
 import org.gotti.wurmunlimited.modsupport.actions.ModAction;
 import org.gotti.wurmunlimited.modsupport.actions.ModActions;
 
-public class AddWLPlayerAction implements WurmServerMod, ItemTypes, MiscConstants, ModAction, BehaviourProvider, ActionPerformer
+public class RemoveWLPlayerAction implements WurmServerMod, ItemTypes, MiscConstants, ModAction, BehaviourProvider, ActionPerformer
 {
     private static short actionID;
     private static ActionEntry actionEntry;
 
-    AddWLPlayerAction()
+    public RemoveWLPlayerAction()
     {
         actionID = (short) ModActions.getNextActionId();
-        actionEntry = ActionEntry.createEntry(actionID, "Add Player to WhiteList", "", new int[0]);
+        actionEntry = ActionEntry.createEntry(actionID, "Remove Player from WhiteList", "", new int[0]);
         ModActions.registerAction(actionEntry);
     }
 
@@ -61,7 +62,7 @@ public class AddWLPlayerAction implements WurmServerMod, ItemTypes, MiscConstant
     {
         if (source.getTemplateId() == ItemList.wandDeity && target.getTemplateId() == ItemList.wandDeity)
         {
-            AWL q = new AWL(performer, "Whitelist Player", "", target.getWurmId());
+            RWL q = new RWL(performer, "Remove WhiteListed Player", "", target.getWurmId());
             q.sendQuestion();
         }
         return true;

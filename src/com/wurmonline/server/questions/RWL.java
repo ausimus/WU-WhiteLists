@@ -1,8 +1,6 @@
 package com.wurmonline.server.questions;
 import com.wurmonline.server.Players;
 import com.wurmonline.server.creatures.Creature;
-import com.wurmonline.server.deities.Deities;
-import com.wurmonline.server.deities.Deity;
 import com.wurmonline.server.players.Player;
 import com.wurmonline.shared.constants.ProtoConstants;
 import org.ausimus.wurmunlimited.mods.wl.Initiator;
@@ -45,10 +43,10 @@ public final class RWL extends Question
     public void answer(Properties answers)
     {
         setAnswer(answers);
-        parse(this);
+        execute(this);
     }
 
-    private void parse(RWL question)
+    private void execute(RWL question)
     {
         Creature responder = question.getResponder();
         String name = question.getAnswer().getProperty("name");

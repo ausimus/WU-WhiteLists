@@ -3,6 +3,8 @@ package org.ausimus.wurmunlimited.mods.wl;
 import com.wurmonline.server.MiscConstants;
 import com.wurmonline.server.Players;
 import com.wurmonline.server.players.Player;
+import org.ausimus.wurmunlimited.mods.wl.actions.AddWLPlayerAction;
+import org.ausimus.wurmunlimited.mods.wl.actions.RemoveWLPlayerAction;
 import org.gotti.wurmunlimited.modloader.interfaces.*;
 import org.gotti.wurmunlimited.modsupport.actions.ModActions;
 
@@ -21,14 +23,17 @@ public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, 
     @Override
     public void onPlayerLogin(Player player)
     {
+        // There is no need to WhiteList Higher power players.
         if (player.getPower() < MiscConstants.POWER_HERO)
         {
             Players.getInstance().sendGmMessage(null, "WhiteLists:", "Player " + player.getName() + " Connecting.", false);
             try
             {
+                // Call the WhiteList file
                 Properties propPlayers = new Properties();
                 InputStream inputPlayers = new FileInputStream(dir);
                 propPlayers.load(inputPlayers);
+                // Bool value of name, if name is non existent (new conn) value is always false.
                 Boolean isWhiteListed = Boolean.parseBoolean(propPlayers.getProperty(player.getName()));
                 if (!isWhiteListed)
                 {
@@ -55,16 +60,12 @@ public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, 
     }
 
     @Override
-    public void onPlayerLogout(Player player)
-    {
-
-    }
-
-    @Override
     public void init()
     {
         try
         {
+            // Create WhiteList file if it does not already exist,
+            // directory should always exist as its the folder the jar is contained..
             File file = new File(dir);
             if (!file.exists())
             {
@@ -89,6 +90,7 @@ public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, 
     @Override
     public void onServerStarted()
     {
+        // Register the actions.
         ModActions.registerAction(new AddWLPlayerAction());
         ModActions.registerAction(new RemoveWLPlayerAction());
     }

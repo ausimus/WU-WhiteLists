@@ -39,10 +39,10 @@ public final class AWL extends Question
     public void answer(Properties answers)
     {
         setAnswer(answers);
-        parse(this);
+        execute(this);
     }
 
-    private void parse(AWL question)
+    private void execute(AWL question)
     {
         Creature responder = question.getResponder();
         String name = question.getAnswer().getProperty("name");
