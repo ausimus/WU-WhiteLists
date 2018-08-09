@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 public final class AWL extends Question
 {
     private Logger logger = Logger.getLogger(AWL.class.getName());
+
     public AWL(Creature aResponder, String aTitle, String aQuestion, long aTarget)
     {
         super(aResponder, aTitle, aQuestion, 1337, aTarget);

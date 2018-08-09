@@ -21,6 +21,7 @@ public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, 
     private Logger logger = Logger.getLogger(Initiator.class.getName());
     public static String dir = "mods/WhiteList/whiteList.txt";
     public static boolean showWhiteList;
+
     @Override
     public void onPlayerLogin(Player player)
     {
