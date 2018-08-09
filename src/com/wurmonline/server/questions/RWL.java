@@ -7,7 +7,6 @@ import org.ausimus.wurmunlimited.mods.wl.Initiator;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
