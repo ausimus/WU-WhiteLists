@@ -16,10 +16,11 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, PreInitable, ServerStartedListener
+public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, PreInitable, ServerStartedListener, Configurable
 {
     private Logger logger = Logger.getLogger(Initiator.class.getName());
     public static String dir = "mods/WhiteList/whiteList.txt";
+    public static boolean showWhiteList;
     @Override
     public void onPlayerLogin(Player player)
     {
@@ -93,5 +94,11 @@ public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, 
         // Register the actions.
         ModActions.registerAction(new AddWLPlayerAction());
         ModActions.registerAction(new RemoveWLPlayerAction());
+    }
+
+    @Override
+    public void configure(Properties properties)
+    {
+        showWhiteList = Boolean.parseBoolean(properties.getProperty("showWhiteList", Boolean.toString(showWhiteList)));
     }
 }

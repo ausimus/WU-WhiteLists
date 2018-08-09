@@ -47,7 +47,7 @@ public class AddWLPlayerAction implements WurmServerMod, ItemTypes, MiscConstant
 
     public List<ActionEntry> getBehavioursFor(Creature performer, Item source, Item target)
     {
-        if (target.getTemplateId() == ItemList.wandDeity && source.getTemplateId() == ItemList.wandDeity)
+        if (source.isWand() && target.isWand() && performer.getPower() > POWER_NONE)
         {
             return Collections.singletonList(actionEntry);
         }
@@ -59,7 +59,7 @@ public class AddWLPlayerAction implements WurmServerMod, ItemTypes, MiscConstant
 
     public boolean action(Action act, Creature performer, Item source, Item target, short action, float counter)
     {
-        if (source.getTemplateId() == ItemList.wandDeity && target.getTemplateId() == ItemList.wandDeity)
+        if (source.isWand() && target.isWand() && performer.getPower() > POWER_NONE)
         {
             AWL q = new AWL(performer, "Whitelist Player", "", target.getWurmId());
             q.sendQuestion();

@@ -29,7 +29,7 @@ public final class AWL extends Question
         }
         catch (Exception ex)
         {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, ex.getMessage(), ex);
         }
 
         buf.append(createAnswerButton2());
