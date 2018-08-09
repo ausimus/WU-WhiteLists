@@ -34,6 +34,7 @@ public final class RWL extends Question
             {
                 wlPlayers.add(cl);
             }
+            buf.append("text{text='Names are case sensitive.'}");
             if (Initiator.showWhiteList)
             {
                 Object[] theArray = wlPlayers.toArray();

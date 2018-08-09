@@ -26,6 +26,7 @@ public final class AWL extends Question
         try
         {
             String name = "";
+            buf.append("text{text='Names are case sensitive.'}");
             buf.append("harray{input{id='name'; maxchars='64'; text='").append(name).append("'}label{text='Name'}}");
         }
         catch (Exception ex)
