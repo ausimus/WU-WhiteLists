@@ -97,13 +97,9 @@ public final class RWL extends Question
         // If there online kick them
         for (Player player : Players.getInstance().getPlayers())
         {
-            if (Objects.equals(player.getName(), name))
+            if (player.getName().equals(name))
             {
-                Players.getInstance().sendGmMessage(
-                        null, "WhiteLists:", "Player " + player.getName() +
-                                " Disconnected, Not WhiteListed.", false);
-                player.getCommunicator().sendShutDown(
-                        "Disconnected : You are not on the whitelist.", true);
+                player.getCommunicator().sendShutDown("Disconnected : You are not on the whitelist.", true);
                 player.setSecondsToLogout(5);
             }
         }
