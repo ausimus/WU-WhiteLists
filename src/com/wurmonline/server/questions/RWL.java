@@ -69,7 +69,12 @@ public final class RWL extends Question
     {
         Creature responder = question.getResponder();
         String name = question.getAnswer().getProperty("name");
-
+        if (name.equals(""))
+        {
+            responder.getCommunicator().sendNormalServerMessage(
+                    "You did not select a name.", ProtoConstants.M_FAIL);
+            return;
+        }
         try
         {
             // In
@@ -79,7 +84,7 @@ public final class RWL extends Question
             in.close();
             // Out
             FileOutputStream out = new FileOutputStream(Initiator.dir);
-            props.setProperty(name, String.valueOf(false));
+            props.remove(name);
             props.store(out, null);
             out.close();
         }
@@ -100,7 +105,9 @@ public final class RWL extends Question
                 player.setSecondsToLogout(5);
             }
         }
-        responder.getCommunicator().sendNormalServerMessage("Player " + name + ", is no longer whitelisted. Kicking", ProtoConstants.M_FAIL);
+        responder.getCommunicator().sendNormalServerMessage(
+                "Player " + name + ", is no longer whitelisted. If they are online, " +
+                        "they are being kicked.", ProtoConstants.M_FAIL);
         RWL q = new RWL(responder, "Remove WhiteListed Player", "", NOID);
         q.sendQuestion();
     }
