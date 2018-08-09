@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, PreInitable, ServerStartedListener, Configurable
 {
     private Logger logger = Logger.getLogger(Initiator.class.getName());
-    public static String dir = "mods/WhiteList/whiteList.txt";
+    public static String dir;
     public static boolean showWhiteList;
 
     @Override
@@ -101,5 +101,6 @@ public class Initiator implements WurmServerMod, PlayerLoginListener, Initable, 
     public void configure(Properties properties)
     {
         showWhiteList = Boolean.parseBoolean(properties.getProperty("showWhiteList", Boolean.toString(showWhiteList)));
+        dir = properties.getProperty("whiteListDirectory", dir);
     }
 }

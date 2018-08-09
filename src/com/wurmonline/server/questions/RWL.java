@@ -41,9 +41,11 @@ public final class RWL extends Question
                 buf.append("text{text='Currently WhiteListed Players.'}");
                 for (int x = 0; x < theArray.length; ++x)
                 {
-                    if (!wlPlayers.get(x).startsWith("#"))
+                    if (!wlPlayers.get(x).startsWith("#")) /*No deed to un-whitelist the timestamp.*/
                     {
-                        buf.append("text{text='").append(wlPlayers.get(x)).append("'}");
+                        String theString = wlPlayers.get(x);
+                        buf.append("text{text='").append(
+                                theString.substring(/*Remove the =true*/0, theString.length() - 5)).append("'}");
                     }
                 }
             }
